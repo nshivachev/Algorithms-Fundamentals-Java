@@ -1,0 +1,13 @@
+# IDE files
+.idea/
+*.iml
+# Build directories
+/target/
+/bin/
+/out/
+# Logs
+*.log
+# OS files
+.DS_Store
+# Compiled files
+*.class

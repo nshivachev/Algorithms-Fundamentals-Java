@@ -1,4 +1,4 @@
-package fundamentals.combinatorialProblems;
+package fundamentals.combinatorialProblemsLab;
 
 import java.util.Scanner;
 

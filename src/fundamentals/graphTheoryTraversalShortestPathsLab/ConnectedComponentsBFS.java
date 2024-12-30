@@ -3,7 +3,7 @@ package fundamentals.graphTheoryTraversalShortestPathsLab;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ConnectedComponents {
+public class ConnectedComponentsBFS {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -37,27 +37,37 @@ public class ConnectedComponents {
         }
     }
 
-    public static List<Deque<Integer>> getConnectedComponents(List<List<Integer>> graph) {
+    private static List<Deque<Integer>> getConnectedComponents(List<List<Integer>> graph) {
         boolean[] visited = new boolean[graph.size()];
         List<Deque<Integer>> components = new ArrayList<>();
 
         for (int start = 0; start < graph.size(); start++) {
             if (!visited[start]) {
                 components.add(new ArrayDeque<>());
-                dfs(start, components, graph, visited);
+                bfs(start, components, graph, visited);
             }
         }
 
         return components;
     }
 
-    public static void dfs(int node, List<Deque<Integer>> components, List<List<Integer>> graph, boolean[] visited) {
-        if (!visited[node]) {
-            visited[node] = true;
-            for (int child : graph.get(node)) {
-                dfs(child, components, graph, visited);
-            }
+    private static void bfs(int start, List<Deque<Integer>> components, List<List<Integer>> graph, boolean[] visited) {
+        Deque<Integer> queue = new ArrayDeque<>();
+        visited[start] = true;
+
+        queue.offer(start);
+
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+
             components.get(components.size() - 1).offer(node);
+
+            for (int child : graph.get(node)) {
+                if (!visited[child]) {
+                    visited[child] = true;
+                    queue.offer(child);
+                }
+            }
         }
     }
 }
